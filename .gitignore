@@ -1,0 +1,129 @@
+# Fichiers d'environnement
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Environnements virtuels Python
+venv/
+env/
+.venv/
+ENV/
+
+# Fichiers de cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Cache de test et couverture
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environnements pyenv
+.python-version
+
+# Environnements pipenv
+Pipfile.lock
+
+# Environnements poetry
+poetry.lock
+
+# Fichiers de configuration locaux
+config/local_settings.py
+config/*.local.py
+
+# Base de données locale
+*.db
+*.sqlite3
+
+# Redis (local)
+dump.rdb
+
+# Fichiers de logs
+logs/
+*.log
+log/
+
+# Fichiers temporaires
+*~
+*.swp
+*.swo
+
+# Fichiers système
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+docker-data/
+
+# Fichiers de déploiement spécifiques
+instance/
+
+# Fichiers de cache divers
+.cache/
+node_modules/
+
+# Fichiers de build frontend (si jamais ajoutés)
+web/static/dist/
+web/static/bundle.js
+
+# Fichiers de coverage
+.coverage
+.coveragerc
+
+# Fichiers de profiling
+profile.stats
