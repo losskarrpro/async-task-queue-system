@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: async-task-queue-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - async-task-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  api:
+    build: .
+    container_name: async-task-queue-api
+    ports:
+      - "7500:7500"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - QUEUE_TYPE=priority
+      - LOG_LEVEL=INFO
+      - API_HOST=0.0.0.0
+      - API_PORT=7500
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - async-task-network
+    command: python scripts/start_api.py
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7500/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  worker:
+    build: .
+    container_name: async-task-queue-worker
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - QUEUE_TYPE=priority
+      - LOG_LEVEL=INFO
+      - WORKER_COUNT=4
+      - WORKER_MAX_TASKS=100
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - async-task-network
+    command: python scripts/start_workers.py
+    volumes:
+      - ./logs:/app/logs
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  async-task-network:
+    driver: bridge
+
+volumes:
+  redis_data:
+    driver: local
