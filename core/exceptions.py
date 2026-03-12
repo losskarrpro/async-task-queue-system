@@ -1,0 +1,58 @@
+"""
+Exceptions for the Async Task Queue System
+"""
+
+
+class TaskError(Exception):
+    """Base exception for task-related errors"""
+    pass
+
+
+class QueueError(Exception):
+    """Base exception for queue-related errors"""
+    pass
+
+
+class WorkerError(Exception):
+    """Base exception for worker-related errors"""
+    pass
+
+
+class ResultStoreError(Exception):
+    """Base exception for result store errors"""
+    pass
+
+
+class InvalidTaskError(TaskError):
+    """Raised when a task is invalid"""
+    pass
+
+
+class TaskValidationError(TaskError):
+    """Raised when task validation fails"""
+    pass
+
+
+class QueueFullError(QueueError):
+    """Raised when a queue is full"""
+    pass
+
+
+class QueueNotFoundError(QueueError):
+    """Raised when a queue is not found"""
+    pass
+
+
+class TaskNotFoundError(TaskError):
+    """Raised when a task is not found"""
+    pass
+
+
+class SerializationError(TaskError):
+    """Raised when task serialization/deserialization fails"""
+    pass
+
+
+class QueueOperationError(QueueError):
+    """Raised when a queue operation fails"""
+    pass
